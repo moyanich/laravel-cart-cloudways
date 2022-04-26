@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('brand')->nullable(false);
             $table->double('price')->nullable(false);
             $table->double('shipping_cost');
-            $table->string('image_path')->nullable(false);
+            $table->string('image_path')->nullable(true);  // Should be false 
             $table->timestamps();
         });
     }
