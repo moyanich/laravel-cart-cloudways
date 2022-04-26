@@ -33,7 +33,7 @@ class ProductFactory extends Factory
             ]),
             'price' => $this->faker->numberBetween($min = 1000, $max = 9000),
             'shipping_cost' => $this->faker->randomDigit(),
-           // 'image_path' => $this->faker->image($dir = '/storage', $width = 640, $height = 480),
+            'image_path' => $this->faker->image($dir = 'storage', $width = 640, $height = 480),
         ];
     }
 }
