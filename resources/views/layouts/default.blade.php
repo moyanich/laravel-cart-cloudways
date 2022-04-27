@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Laravel</title>
+	<title>Cloudways Shop</title>
 
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -18,30 +18,26 @@
 	</style>
 </head>
 
-
 <body>
 
+	<header>
 
+		@include('includes.header')
 
-		<header>
+	</header>
 
-			@include('includes.header')
+	<div id="main" class="row">
 
-		</header>
+		@yield('content')
 
-		<div id="main" class="row">
+	</div>
 
-				@yield('content')
+	<footer class="row">
 
-		</div>
+		@include('includes.footer')
 
-		<footer class="row">
+	</footer>
 
-			@include('includes.footer')
-
-		</footer>
-
-	
 
 </body>
 
