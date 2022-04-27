@@ -42,8 +42,6 @@ class ProductFactory extends Factory
                 storage_path('images/product-04.jpg')
             ]), */
             'image_path' =>  $this->faker->randomElement([
-                'images/product-01.jpg',
-                'images/product-02.jpg',
                 'images/product-03.jpg',
                 'images/product-04.jpg'
             ]),
