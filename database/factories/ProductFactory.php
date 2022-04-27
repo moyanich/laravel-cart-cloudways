@@ -24,7 +24,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'details' => $this->faker->text($maxNbChars = 200),
+            'details' => $this->faker->text($maxNbChars = 50),
             'description' => $this->faker->text($maxNbChars = 200),
             'brand' => $this->faker->randomElement([
                 'Samsung',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -11,8 +12,10 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function cart()
     {
+      // dd(session('cartItems'));
+
         return view('cart.cart');
     }
 
@@ -21,43 +24,30 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addToCart($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $cartItems = session()->get('cartItems', []);
+        // dd( $product);
+
+        if(isset($cartItems[$id])) {
+           $cartItems[$id]['quantity']++;
+        } else {
+            $cartItems[$id] = [
+                'id' => $id,
+                'image_path' => $product->image_path,
+                'name' => $product->name,
+                'details' => $product->details,
+                'price' => $product->price,
+                'quantity' => 1,
+            ];
+        }
+
+        session()->put('cartItems', $cartItems);
+
+        return redirect()->back()->with('success', 'Product added to cart!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -77,8 +67,18 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        if($request->id) {
+            
+            $cartItems = session()->get('cartItems');
+
+            if(isset($cartItems[$request->id])) {
+                unset($cartItems[$request->id]);
+                session()->put('cartItems', $cartItems);
+            }
+            return redirect()->back()->with('success', 'Product deleted successfully');
+
+        }
     }
 }

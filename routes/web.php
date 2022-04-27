@@ -5,7 +5,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,5 +25,10 @@ Route::get('/', function () {
 Route::get('/', [PagesController::class, 'index'])->name('home');
 Route::get('/shop', [ProductController::class, 'index'])->name('shop');
 Route::get('/shop/{id}', [ProductController::class, 'show'])->name('shop.product');
-//Route::get('/employees/{education}/edit-education', [EmployeesController::class, 'education_edit'])->name('employees.edit-education');
+
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+
+Route::get('/add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+
+Route::get('/delete-from-cart/{id}', [CartController::class, 'delete'])->name('delete.from.cart');
+

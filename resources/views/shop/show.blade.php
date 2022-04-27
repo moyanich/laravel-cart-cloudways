@@ -2,12 +2,16 @@
 
 @section('content')
 
+{{-- Messages --}}
+<x-messages />
+{{-- End Messages --}}
+
 <div class="grid sm:grid-cols-2 gap-2 pt-12 sm:pt-20 mx-auto w-4/5">
 	<div class="mx-auto mr-4">
 		<img 
 		src="{{ asset('storage/'.$product->image_path) }}" 
 		alt="{{ $product->name }}">
-		</div>
+	</div>
 
 	<div>
 		<h1 class="text-4xl text-black font-bold pb-4">
@@ -34,16 +38,14 @@
 		</div>
 		
 		<a 
-			href="{{-- route('add.to.cart', $product->id) --}}"
+			href="{{ route('add.to.cart', $product->id) }}"
 			class="px-8 py-4 text-md text-white bg-blue-600 rounded-md w-full" 
 			role="button" 
 			aria-pressed="true">
 			Add To Cart
 		</a>
 
-	
-
-		
 	</div>
+</div>
 
 @stop
