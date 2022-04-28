@@ -56,9 +56,14 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateFromCart(Request $request, $id)
     {
-        //
+        if($request->id && $request->quantity) {
+            $cartItems = session()->get('cartItems');
+            $cartItems[$request->id]["quantity"] = $request->quantity;
+            session()->put('cartItems', $cartItems);
+        }
+        return redirect()->back()->with('success', 'Cart Updated!');
     }
 
     /**
@@ -78,7 +83,6 @@ class CartController extends Controller
                 session()->put('cartItems', $cartItems);
             }
             return redirect()->back()->with('success', 'Product deleted successfully');
-
         }
     }
 }
